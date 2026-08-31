@@ -1,0 +1,62 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+	id 'org.springframework.boot' version '3.5.11'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.intelliplatforms'
+version = '0.0.3-SNAPSHOT'
+description = 'OpenKit Auto-Configuration SpringBoot Starter Library. ' +
+        'It injects an easy-to-use bizevent exporter by managing all required OpenKit/Session logic using auto-configuration'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+    maven {
+        url 'https://pkgs.dev.azure.com/InteliPlatforms/_packaging/InteliPlatforms/maven/v1'
+        name 'InteliPlatforms'
+        credentials(PasswordCredentials)
+        authentication {
+            basic(BasicAuthentication)
+        }
+    }
+}
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url 'https://pkgs.dev.azure.com/InteliPlatforms/_packaging/InteliPlatforms/maven/v1'
+            name 'InteliPlatforms'
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+    api "com.dynatrace.openkit:openkit-java:3.3.0"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.named('bootJar') {
+    enabled = false
+}
