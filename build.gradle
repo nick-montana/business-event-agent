@@ -18,30 +18,12 @@ java {
 
 repositories {
 	mavenCentral()
-    maven {
-        url 'https://pkgs.dev.azure.com/InteliPlatforms/_packaging/InteliPlatforms/maven/v1'
-        name 'InteliPlatforms'
-        credentials(PasswordCredentials)
-        authentication {
-            basic(BasicAuthentication)
-        }
-    }
 }
 
 publishing {
     publications {
         library(MavenPublication) {
             from components.java
-        }
-    }
-    repositories {
-        maven {
-            url 'https://pkgs.dev.azure.com/InteliPlatforms/_packaging/InteliPlatforms/maven/v1'
-            name 'InteliPlatforms'
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
         }
     }
 }

@@ -19,6 +19,10 @@ TODO: Fill out this long description.
 
 ## Security
 
+Network connection between the bizevent-agent and the server-side occurs through a middle management server using a TLS handshake
+
+
+
 ## Background
 
 ## Install
