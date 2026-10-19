@@ -25,6 +25,11 @@ Network connection between the bizevent-agent and the server-side occurs through
 
 ## Background
 
+When Business Events are registered through the dedicated function they are tied to the current server session id.
+
+
+![Alt Text](./assets/images/sessions_event_data.svg)
+
 ## Install
 
 ```sh
