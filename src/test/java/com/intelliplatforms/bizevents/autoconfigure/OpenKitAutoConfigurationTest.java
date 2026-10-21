@@ -22,7 +22,7 @@ public class OpenKitAutoConfigurationTest {
                 "com.intelliplatforms.bizevents.applicationId=test",
                 "com.intelliplatforms.bizevents.deviceId=123456",
                 "com.intelliplatforms.bizevents.endpointUrl=https://tenantid.beaconurl.com/mbeacon",
-                "com.intelliplatforms.bizevents.waitForInitCompletion=false"
+                "rumagent.bizevents.waitForInitCompletion=false"
         ).run((context) -> {
             assertThat(context).hasSingleBean(BizEventAgent.class);
         });
@@ -37,10 +37,10 @@ public class OpenKitAutoConfigurationTest {
         );
 
         contextRunner.withPropertyValues(
-                "com.intelliplatforms.bizevents.enabled=true",
-                "com.intelliplatforms.bizevents.deviceId=123456",
-                "com.intelliplatforms.bizevents.endpointUrl=https://tenantid.beaconurl.com/mbeacon",
-                "com.intelliplatforms.bizevents.waitForInitCompletion=false"
+                "rumagent.bizevents.enabled=true",
+                "rumagent.bizevents.deviceId=123456",
+                "rumagent.bizevents.endpointUrl=https://tenantid.beaconurl.com/mbeacon",
+                "rumagent.bizevents.waitForInitCompletion=false"
         ).run((context) -> {
             Assertions.assertEquals("Missing value for required property applicationId!", exception.getMessage());
         });
@@ -51,7 +51,7 @@ public class OpenKitAutoConfigurationTest {
     public void testAutoConfigurationWithOptionalProperties() {
 
         contextRunner.withPropertyValues(
-                "com.intelliplatforms.bizevents.enabled=true",
+                "rumagent.bizevents.enabled=true",
                 "openkit.applicationId=test",
                 "openkit.waitForInitCompletion=false",
                 "openkit.deviceId=123456",
@@ -69,7 +69,7 @@ public class OpenKitAutoConfigurationTest {
     public void testDisableAutoConfigurationWithExplicitBoolean() {
 
         contextRunner.withPropertyValues(
-                "com.intelliplatforms.bizevents.enabled=false",
+                "rumagent.bizevents.enabled=false",
                 "openkit.applicationId=test",
                 "openkit.deviceId=123456",
                 "openkit.endpointUrl=test"

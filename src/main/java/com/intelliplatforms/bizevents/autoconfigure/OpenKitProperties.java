@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * <a href="http://json.org/">OpenKit GitHub Documentation</a>.
  */
-@ConfigurationProperties(prefix = "com.intelliplatforms.bizevents")
+@ConfigurationProperties(prefix = "rumagent.bizevents")
 public class OpenKitProperties {
 
 

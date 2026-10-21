@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 
 @AutoConfiguration
-@ConditionalOnBooleanProperty(name = "com.intelliplatforms.bizevents.enabled", matchIfMissing = true)
+@ConditionalOnBooleanProperty(name = "rumagent.bizevents.enabled", matchIfMissing = true)
 @EnableConfigurationProperties(OpenKitProperties.class)
 public class OpenKitAutoConfiguration {
 
