@@ -1,7 +1,6 @@
-# business-event-agent
+# Business Event Agent - Java/SpringBoot Reference Implementation
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-TODO: Put more badges here.
 
 OpenPipeline Beacon Forwarder for business-grade data
 
@@ -48,17 +47,46 @@ dependencies {
 
 ## Usage
 
-```sh
-com.intelliplatforms.bizevents.endpointUrl: https://{ENVIRONMENT_ACTIVE_GATE_NAME}:9999/mbeacon/{tenant_id}
-com.intelliplatforms.bizevents.manufacturer: {TEAM_NAME}
-com.intelliplatforms.bizevents.applicationName: {APPLICATION_NAME}
-com.intelliplatforms.bizevents.applicationVersion: {APPLICATION_NAME}
-com.intelliplatforms.bizevents.operatingSystem: {KUBERNETES_CLUSTER_NAME}
-com.intelliplatforms.bizevents.waitForInitCompletion: true/false
-com.intelliplatforms.bizevents.disableSslVerification: true/false
-com.intelliplatforms.bizevents.logLevel: INFO
+Bind the configurations to the business event agent using application.properties files
+```java
+
+rumagent.bizevents.enabled: true
+rumagent.bizevents.endpointUrl: https://{ENVIRONMENT_ACTIVE_GATE_NAME}:9999/mbeacon/{tenant_id}
+rumagent.bizevents.manufacturer: {TEAM_NAME}
+rumagent.bizevents.applicationName: {APPLICATION_NAME}
+rumagent.bizevents.applicationVersion: {APPLICATION_NAME}
+rumagent.bizevents.operatingSystem: {KUBERNETES_CLUSTER_NAME}
+rumagent.bizevents.waitForInitCompletion: true/false
+rumagent.bizevents.disableSslVerification: true/false
+rumagent.bizevents.logLevel: INFO
 ```
 
+When the library is successfully installed as a dependency you can then inject it into your REST API Service components
+```java
+/* SpringBoot/Java REST API Service Component Demonstrating how to send business events */
+public class ExampleService{
+    
+  
+    @Autowired
+    private BizEventAgent bizEventAgent; 
+
+    public void doBusinessLogic() {
+
+        // JSONValue is a required value type unique to openkit
+        Map <String, JSONValue> attributes = new HashMap<String, JSONValue>();
+
+        attributes.put("event.name", JSONStringValue.fromString("Confirmed Booking")); // 
+        attributes.put("screen", JSONStringValue.fromString("booking-confirmation"));
+        attributes.put("product", JSONStringValue.fromString("Danube Anna Hotel"));
+        attributes.put("amount", JSONNumberValue.fromDouble(358.35));
+        attributes.put("currency", JSONStringValue.fromString("USD"));
+        attributes.put("reviewScore", JSONNumberValue.fromDouble(4.8));
+        
+        // register the business event record
+        bizEventAgent.sendBizEvent("com.companyname.backend.service", attributes);
+    }
+}
+```
 ## Maintainers
 
 [@nick-montana](https://github.com/nick-montana)
