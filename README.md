@@ -5,8 +5,6 @@ TODO: Put more badges here.
 
 OpenPipeline Beacon Forwarder for business-grade data
 
-TODO: Fill out this long description.
-
 ## Table of Contents
 
 - [Security](#security)
@@ -25,6 +23,10 @@ Network connection between the bizevent-agent and the server-side occurs through
 
 ## Background
 
+An "event" is a data record expressing an occurrence and its context. Events are routed from an event producer (the source) to interested event consumers. The routing can  Events will contain two types of information: the Event Data representing the Occurrence and Context metadata providing contextual information about the Occurrence. A single occurrence MAY result in more than one event.
+
+Business Events are registered using a dedicated function inside the BizEventAgent Service Component. 
+
 When Business Events are registered through the dedicated function they are tied to the current server session id.
 
 
@@ -32,12 +34,29 @@ When Business Events are registered through the dedicated function they are tied
 
 ## Install
 
+Download this repository folder as a ZIP 
+
+build.gradle.kts
 ```sh
+
+dependencies {
+
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation(files("{PATH_TO_JAR}"))
+}
 ```
 
 ## Usage
 
 ```sh
+com.intelliplatforms.bizevents.endpointUrl: https://{ENVIRONMENT_ACTIVE_GATE_NAME}:9999/mbeacon/{tenant_id}
+com.intelliplatforms.bizevents.manufacturer: {TEAM_NAME}
+com.intelliplatforms.bizevents.applicationName: {APPLICATION_NAME}
+com.intelliplatforms.bizevents.applicationVersion: {APPLICATION_NAME}
+com.intelliplatforms.bizevents.operatingSystem: {KUBERNETES_CLUSTER_NAME}
+com.intelliplatforms.bizevents.waitForInitCompletion: true/false
+com.intelliplatforms.bizevents.disableSslVerification: true/false
+com.intelliplatforms.bizevents.logLevel: INFO
 ```
 
 ## Maintainers
